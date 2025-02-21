@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>jQuery Plugin</title>
+
+    <link rel="stylesheet" href="assets/css/style.css" />
+    <link rel="stylesheet" href="assets/css/magnific-popup.css" />
+
+    <script src="assets/js/jQuery.min.js"></script>
+    <script src="assets/js/magnific-popup.min.js"></script>
+  </head>
+  <body>
+    <script>
+      jQuery(document).ready(function () {
+        $(".image-link").magnificPopup({ type: "image" });
+        $(".video-link").magnificPopup({ type: "iframe" });
+        $(".load-content").click(function () {
+          $(".show-content").html("Loading......");
+          $.ajax({
+            url: "https://jsonplaceholder.typicode.com/posts",
+            success: function (result) {
+              $(".show-content").empty();
+              result.forEach((post) => {
+                $(".show-content").append(
+                  `<h2>${post.title}</h2><p>${post.body}</p>`
+                );
+              });
+            },
+          });
+        });
+      });
+    </script>
+
+    <div class="container">
+      <div class="pop-up">
+        <div class="img-popup">
+          <a class="image-link" href="assets/img/life-cycle-13222.jpg"
+            >Open Image</a
+          >
+        </div>
+        <div class="vid-popup">
+          <a
+            class="video-link"
+            href="https://www.youtube.com/watch?v=IEnG8coUPSM"
+            >Open Video</a
+          >
+        </div>
+      </div>
+      <button class="load-content">Load Content</button>
+      <div class="show-content"></div>
+    </div>
+  </body>
+</html>
